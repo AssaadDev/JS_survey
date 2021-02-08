@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<meta charset="UTF-8">
+<title>Anonymous Survey</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<link rel="stylesheet" href="style.css">
+
+
+<body>
+
+    <div class="place" id="trisata">
+
+
+        <p id="titl">Setup your Survey</p>
+        <div id="ovdjeNaslov">
+
+        </div>
+        <form action="" class="info" id="ovdje">
+
+            <label for="survName" id="fld1">What is your survey name?
+                <input type="text" id="survName" name="survName">
+            </label>
+
+            <label for="numbofcho" class="moveup" id="fld2">Number of choice
+                <input type="numbers" id="numbofcho" name="numbofcho">
+            </label>
+
+
+            <input type="button" id="sub" name="sub" value="Dalje" onclick="submitForm()">
+
+
+        </form>
+
+    </div>
+
+    <script>
+        function submitForm() {
+            var numb = document.getElementById("numbofcho").value;
+
+            var nme = document.getElementById("survName").value;
+            document.getElementById("titl").innerHTML = nme;
+            var sizeOfField = document.getElementById("numbofcho").value;
+
+            rmv();
+            addel(sizeOfField);
+        }
+
+        function addel(sz) {
+            var div = document.getElementById("ovdje");
+            var upTop = document.getElementById("ovdjeNaslov");
+            var inst = document.createElement("P");
+
+            inst.setAttribute("id", "hop");
+            inst.setAttribute("class", "txt");
+            inst.innerText = "Molimo unesite vase opcije";
+            upTop.appendChild(inst);
+
+            for (var i = 0; i < sz; i++) {
+
+                var x = document.createElement("INPUT");
+                x.setAttribute("class", "kls")
+                x.setAttribute("type", "text");
+                x.setAttribute("id", "option" + i);
+                x.setAttribute("placeholder", "Unesite opciju...");
+                div.appendChild(x);
+
+            }
+
+            var ended = document.createElement("INPUT");
+            ended.setAttribute("type", "button");
+            ended.setAttribute("value", "Zavrsi anketu");
+            ended.setAttribute("class", "klik")
+            ended.setAttribute("id", "cup")
+            ended.setAttribute("onclick", "finisHER()")
+
+            var putIN = document.getElementById("trisata");
+
+            putIN.appendChild(ended);
+
+        }
+
+        function rmv() {
+            document.getElementById("fld1").remove();
+            document.getElementById("fld2").remove();
+            document.getElementById("sub").remove();
+        }
+
+        function finisHER() {
+
+            var dif = document.createElement("div");
+            dif.setAttribute("class", "diff info");
+            dif.setAttribute("id", "anket");
+            document.getElementById("trisata").appendChild(dif);
+
+
+            var siz = document.getElementsByTagName("input").length;
+            const val = [];
+            for (var i = 0; i < siz; i++) {
+                val[i] = document.getElementById("option" + i);
+
+            }
+            rmw2(siz);
+
+            for (var y = 0; y < siz; y++) {
+
+                var x = [];
+                x[y] = document.createElement("button");
+                x[y].setAttribute("class", "lepo");
+                x[y].setAttribute("id", "opt" + y);
+                x[y].innerText = val[y].value;
+                dif.appendChild(x[y]);
+
+            }
+
+        }
+
+        function rmw2(sze) {
+
+            document.getElementById("hop").remove();
+            document.getElementById("cup").remove();
+            document.getElementById("ovdje").remove();
+
+            /* for (var i = 0; i < sze - 1; i++) {
+                 document.getElementById("option" + i).remove();
+             }*/
+        }
+    </script>
+</body>
+
+</html>
